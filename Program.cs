@@ -58,24 +58,27 @@
             int n = Convert.ToInt32(Console.ReadLine());
 
             int[,] arr = new int[m, n];
+            int counter = 1;
             for (int i = 0; i < m; i++)
             {
                 for(int j = 0; j < n; j++)
                 {
-                    if (i % 2 != 0)
-                        arr[i, j] = i+j;
+                    if (i % 2 == 0)
+                        arr[i, j] = counter;
                     else
-                        arr[i, arr.GetLength(1) - 1] = i+j;
+                        arr[i, (arr.GetLength(1) - j - 1)] = counter;
+                    counter++;
                 }
             }
 
             // Вывод
-            for (int i = 0;i < m; i++)
+            for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    Console.Write($"| {arr[i, j]}");
+                    Console.Write($"|\t{arr[i, j]}\t");
                 }
+                Console.WriteLine("|");
             }
         }
     }
