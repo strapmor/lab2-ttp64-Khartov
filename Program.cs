@@ -5,17 +5,29 @@
         static void Main(string[] args)
         {
             //Task1();
-            Task2();
+            //Task2();
+            Task3();
             Console.ReadKey();
+        }
+
+        static bool ArrayInput(out string[] arr)
+        {
+            Console.Write("Введите массив чисел одной строкой: ");
+            string? input = Console.ReadLine();
+            if (input == null)
+            {
+                arr = new string[0];
+                return false;
+            }
+            arr = input.Split(' ');
+            return true;
         }
 
         static void Task1()
         {
-            Console.Write("Задание 1. Введите массив чисел одной строкой: ");
+            Console.Write("Задание 1. ");
             // Ввод
-            string? input = Console.ReadLine();
-            if (input == null) return;
-            string[] splitted = input.Split(' ');
+            if (!ArrayInput(out string[] splitted)) return;
 
             // Переносим в массив интов через цикл
             int[] arr = new int[splitted.Length];
@@ -49,19 +61,47 @@
             Console.WriteLine();
         }
 
-        static void Task2()
+        static bool MakeMatrix(out int[,] arr)
         {
-            // Ввод размеров и заполнение массива
-            Console.Write("Задание 2. Введите первую размерность двумерного массива: ");
-            int m = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите вторую размерность двумерного массива: ");
-            int n = Convert.ToInt32(Console.ReadLine());
-
-            int[,] arr = new int[m, n];
-            int counter = 1;
-            for (int i = 0; i < m; i++)
+            Console.Write("Введите первую размерность двумерного массива: ");
+            if (!int.TryParse(Console.ReadLine(), out int m))
             {
-                for(int j = 0; j < n; j++)
+                arr = new int[0, 0];
+                return false;
+            }
+            Console.Write("Введите вторую размерность двумерного массива: ");
+            if (!int.TryParse(Console.ReadLine(), out int n))
+            {
+                arr = new int[0, 0];
+                return false;
+            }
+
+            arr = new int[m, n];
+            return true;
+        }
+
+        static void MatrixOutput(int[,] arr)
+        {
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    Console.Write($"|\t{arr[i, j]}\t");
+                }
+                Console.WriteLine("|");
+            }
+        }
+
+        static void Task2()
+        { 
+            Console.Write("Задание 2. ");
+
+            // Заполнение массива
+            if(!MakeMatrix(out int[,] arr)) return;
+            int counter = 1;
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                for(int j = 0; j < arr.GetLength(1); j++)
                 {
                     if (i % 2 == 0)
                         arr[i, j] = counter;
@@ -72,14 +112,49 @@
             }
 
             // Вывод
-            for (int i = 0; i < m; i++)
+            MatrixOutput(arr);
+        }
+
+        static void Task3()
+        {
+            Console.Write("Задание 3. ");
+            // Создаем двумерный и одномерный массивы. Если что-то вводится не так - завершаем функцию
+            if(!MakeMatrix(out int[,] matrix)) return;
+            int[] arr = new int[matrix.Length];
+            if(!ArrayInput(out string[] stringArray)) return;
+
+            // Переносим числа в числовой массив
+            for(int i = 0; i < arr.Length; i++)
             {
-                for (int j = 0; j < n; j++)
+                // Если число введённых чисел меньше размера массива, то оставшиеся элементы обнуляем
+                if (i >= stringArray.Length)
                 {
-                    Console.Write($"|\t{arr[i, j]}\t");
+                    arr[i] = 0;
+                    continue;
                 }
-                Console.WriteLine("|");
+                if (!int.TryParse(stringArray[i], out arr[i])) return;
             }
+                
+
+            // Заполняем двумерный массив
+            int k = 0;
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for(int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    matrix[i, j] = arr[k];
+                    k++;
+                }
+            }
+
+            // Вывод
+            MatrixOutput(matrix);
+        }
+
+        static void Task4()
+        {
+            Console.Write("Задание 4. ");
+            if (!MakeMatrix(out int[,] matrix)) return;
         }
     }
 }
