@@ -7,7 +7,8 @@
             //Task1();
             //Task2();
             //Task3();
-            Task4();
+            //Task4();
+            Task5();
             Console.ReadKey();
         }
 
@@ -26,7 +27,7 @@
 
         static void Task1()
         {
-            Console.Write("Задание 1. ");
+            Console.WriteLine("Задание 1. ");
             // Ввод
             if (!ArrayInput(out string[] splitted)) return;
 
@@ -95,7 +96,7 @@
 
         static void Task2()
         { 
-            Console.Write("Задание 2. ");
+            Console.WriteLine("Задание 2. ");
 
             // Заполнение массива
             if(!MakeMatrix(out int[,] arr)) return;
@@ -118,7 +119,7 @@
 
         static void Task3()
         {
-            Console.Write("Задание 3. ");
+            Console.WriteLine("Задание 3. ");
             // Создаем двумерный и одномерный массивы. Если что-то вводится не так - завершаем функцию
             if(!MakeMatrix(out int[,] matrix)) return;
             int[] arr = new int[matrix.Length];
@@ -190,7 +191,7 @@
         static void Task4()
         {
             Random rnd = new Random();
-            Console.Write("Задание 4. ");
+            Console.WriteLine("Задание 4. ");
             if (!MakeMatrix(out int[,] matrix)) return;
 
             for(int i = 0;i < matrix.GetLength(0);i++)
@@ -206,6 +207,14 @@
 
             MatrixOutput(matrix);
             Console.WriteLine($"MIN = {min}\nMAX = {max}");
+        }
+
+        static void Task5()
+        {
+            Console.WriteLine("Задание 5. ");
+            
+
+
         }
     }
 }
