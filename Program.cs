@@ -6,7 +6,8 @@
         {
             //Task1();
             //Task2();
-            Task3();
+            //Task3();
+            Task4();
             Console.ReadKey();
         }
 
@@ -148,13 +149,63 @@
             }
 
             // Вывод
+            Console.WriteLine("Одномерный массив:");
+            foreach (int i in arr)
+            {
+                Console.Write($"\t{i}");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Двумерный массив:");
             MatrixOutput(matrix);
+        }
+
+        static int Max(int[,] arr)
+        {
+            int max = 0;
+            for (int i = 0;i < arr.GetLength(0); i++)
+            {
+                for(int j = 0; j < arr.GetLength(1); j++)
+                {
+                    if (arr[i, j] > max)
+                        max = arr[i, j];
+                }
+            }
+            return max;
+        }
+
+        static int Min(int[,] arr)
+        {
+            int min = int.MaxValue;
+            for(int i = 0;i < arr.GetLength(0); i++)
+            {
+                for(int j = 0;j < arr.GetLength(1); j++)
+                {
+                    if(arr[i, j] < min) 
+                        min = arr[i, j];
+                }
+            }
+            return min;
         }
 
         static void Task4()
         {
+            Random rnd = new Random();
             Console.Write("Задание 4. ");
             if (!MakeMatrix(out int[,] matrix)) return;
+
+            for(int i = 0;i < matrix.GetLength(0);i++)
+            {
+                for(int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    matrix[i, j] = rnd.Next(0, 100);
+                }
+            }
+
+            int max = Max(matrix);
+            int min = Min(matrix);
+
+            MatrixOutput(matrix);
+            Console.WriteLine($"MIN = {min}\nMAX = {max}");
         }
     }
 }
