@@ -8,7 +8,9 @@
             //Task2();
             //Task3();
             //Task4();
-            Task5();
+            //Task5();
+            //Task6();
+
             Console.ReadKey();
         }
 
@@ -212,9 +214,47 @@
         static void Task5()
         {
             Console.WriteLine("Задание 5. ");
-            
+            Console.Write("Введите строку: ");
+            string? input = Console.ReadLine();
+            int symbols = 0;
+            if (input != null)
+            {
+                foreach(char c in input)
+                {
+                    symbols++;
+                }
+            }
+            Console.WriteLine($"Symbols = {symbols}");
+        }
 
+        static void Task6()
+        {
+            Console.WriteLine("Задание 6. ");
+            Console.Write("Введите строку: ");
+            string? input = Console.ReadLine();
+            if (input == null) return;
+            input = input.ToUpper();
+
+            Dictionary<char, int> chars = new Dictionary<char, int>();
+            foreach(char c in input)
+            {
+                if (chars.ContainsKey(c))
+                    chars[c]++;
+                else
+                    chars.Add(c, 1);
+            }
+            foreach(KeyValuePair<char, int> pair in chars)
+            {
+                Console.Write($"\"{pair.Key}\" = {pair.Value},\t ");
+            }
+            Console.WriteLine();
 
         }
+
+        static void Task7() 
+        { 
+            
+        }
+
     }
 }
