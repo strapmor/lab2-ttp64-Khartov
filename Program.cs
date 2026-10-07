@@ -1,16 +1,19 @@
-﻿namespace lab2_ttp64_Khartov
+﻿using System.Diagnostics;
+
+namespace lab2_ttp64_Khartov
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            //Task1();
-            //Task2();
-            //Task3();
-            //Task4();
-            //Task5();
-            //Task6();
-
+            Task1();
+            Task2();
+            Task3();
+            Task4();
+            Task5();
+            Task6();
+            Task7();
+            Task8();
             Console.ReadKey();
         }
 
@@ -252,8 +255,59 @@
         }
 
         static void Task7() 
-        { 
-            
+        {
+            Console.WriteLine("Задание 6. ");
+            Console.Write("Введите строку: ");
+            string? input = Console.ReadLine();
+            if (input == null) return;
+            Console.Write("Введите символ: ");
+            string? substr = Console.ReadLine();
+            if (substr != null)
+            {
+                input = input.Replace(substr, string.Empty);
+            }
+            Console.WriteLine(input);
+        }
+
+        static void Task8()
+        {
+            const int N = 10_000;
+            int[,] arr = new int[N,N];
+            int i, j;
+            double t1, t2;
+            var (iters1, iters2) = (0, 0);
+
+            Stopwatch sw = Stopwatch.StartNew();
+            for (i = 0; i < N; i++)
+            {
+                for(j = 0; j < N; j++)
+                {
+                    arr[i,j] = iters1;
+                    iters1++;
+                }
+            }
+            sw.Stop();
+            t1 = sw.ElapsedMilliseconds;
+
+            sw = Stopwatch.StartNew();
+            for(j=0; j < N; j++)
+            {
+                for (i = 0; i < N; i++)
+                {
+                    arr[i,j] = iters2;
+                    iters2++;
+                }
+            }
+            sw.Stop();
+            t2 = sw.ElapsedMilliseconds;
+
+            Console.WriteLine($"Первый цикл:");
+            Console.WriteLine($"\tИтераций = {iters1}");
+            Console.WriteLine($"\tВремя выполнения = {t1}мс");
+
+            Console.WriteLine($"\nВторой цикл:");
+            Console.WriteLine($"\tИтераций = {iters2}");
+            Console.WriteLine($"\tВремя выполнения = {t2}мс");
         }
 
     }
